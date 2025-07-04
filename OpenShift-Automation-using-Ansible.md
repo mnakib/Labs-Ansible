@@ -120,11 +120,11 @@ If your `kubeconfig` is not in the default location, or you prefer to explicitly
         ```
         **Important:** Store tokens securely, ideally using Ansible Vault, not directly in playbooks.
 
-## Create OpenShift Resource using Ansible
+## Create OpenShift Resources using Ansible
 
 ### 1\. Define the Playbook
 
-As an example, we'll use the `redhat.openshift.k8s` module to create a namespace named "databases", a secret named "creds" containing the `MYSQL_ROOT_PASSWORD="rootpass"` key value, and a StatefulSet named "wp-db" using docker.io/mysql image and having the `MYSQL_ROOT_PASSWORD` configured from the "creds" secret, and finally a headless service to expose the "wp-db" StatefulSet.
+As an example, we'll use the `redhat.openshift.k8s` module to create a namespace named _databases_, a secret named _creds_ containing the `MYSQL_ROOT_PASSWORD="rootpass"` key value, and a StatefulSet named _wp-db_ using _docker.io/mysql_ image and having the `MYSQL_ROOT_PASSWORD` configured from the _creds_ secret, and finally a headless service to expose the _wp-db_ StatefulSet.
 
 ```yaml
 - name: Create OpenShift resources for WordPress database
