@@ -124,7 +124,7 @@ If your `kubeconfig` is not in the default location, or you prefer to explicitly
 
 ### 1\. Define the Playbook
 
-As an example, we'll use the `redhat.openshift.k8s` module to create a namespace named "databases", a secret named "creds" containing the `MYSQL_ROOT_PASSWORD="rootpass"` key value, and a StatefulSet named "wp-db" using docker.io/mysql image and having the `MYSQL_ROOT_PASSWORD` configured from the "creds" secret.
+As an example, we'll use the `redhat.openshift.k8s` module to create a namespace named "databases", a secret named "creds" containing the `MYSQL_ROOT_PASSWORD="rootpass"` key value, and a StatefulSet named "wp-db" using docker.io/mysql image and having the `MYSQL_ROOT_PASSWORD` configured from the "creds" secret, and finally a headless service to expose the "wp-db" StatefulSet.
 
 ```yaml
 - name: Create OpenShift resources for WordPress database
@@ -163,7 +163,7 @@ As an example, we'll use the `redhat.openshift.k8s` module to create a namespace
             selector:
               matchLabels:
                 app: mysql
-            serviceName: mysql
+            serviceName: mysql # This must match the name of the Headless Service (if any, not explicitly created here but common for StatefulSets)
             replicas: 1
             template:
               metadata:
@@ -193,6 +193,26 @@ As an example, we'll use the `redhat.openshift.k8s` module to create a namespace
                   resources:
                     requests:
                       storage: 5Gi
+
+    - name: Create 'mysql-service' Service for the StatefulSet in 'databases' namespace
+      redhat.openshift.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            namespace: databases
+            name: mysql-service # Name of the service
+          spec:
+            selector:
+              app: mysql # This must match the 'labels' of the StatefulSet's pods
+            ports:
+              - protocol: TCP
+                port: 3306 # The port the service itself listens on
+                targetPort: 3306 # The port on the pod the service forwards to
+                name: mysql # Name for the port
+            # type: ClusterIP # Default for Service if not specified, only reachable within the cluster
+            # clusterIP: None # For a Headless Service (often used with StatefulSets for DNS per pod)
 ```
 
 ### 2\. Run the Playbook
