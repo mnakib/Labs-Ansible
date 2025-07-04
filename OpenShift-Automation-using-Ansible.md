@@ -1,9 +1,13 @@
 
 # OpenShift Automation using Ansible
 
+This article explains how to use Ansible to create basic resources on OpenShift.
+
 ## Install and Configure Ansible
 
-## Install a Single Node OpenShift (SNO) Clutser
+
+
+## Install a Single Node OpenShift (SNO) Cluster
 
 ## Integrate OpenShift to Ansible
 
