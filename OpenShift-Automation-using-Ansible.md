@@ -126,6 +126,7 @@ If your `kubeconfig` is not in the default location, or you prefer to explicitly
 
 As an example, we'll use the `redhat.openshift.k8s` module to create a namespace named "databases", a secret named "creds" containing the `MYSQL_ROOT_PASSWORD="rootpass"` key value, and a StatefulSet named "wp-db" using docker.io/mysql image and having the `MYSQL_ROOT_PASSWORD` configured from the "creds" secret.
 
+```yaml
 - name: Create OpenShift resources for WordPress database
   hosts: localhost
   connection: local
@@ -192,7 +193,7 @@ As an example, we'll use the `redhat.openshift.k8s` module to create a namespace
                   resources:
                     requests:
                       storage: 5Gi
-
+```
 
 ### 2\. Run the Playbook
 
