@@ -47,8 +47,11 @@ You'll need a user account on each managed node that Ansible can log in as. This
     On **each managed node**:
 
     ```bash
+    # Create an ansible_user
     sudo useradd -m ansible_user
-    sudo passwd ansible_user # Set a strong password
+
+    # Set a strong password
+    echo "Pa$$w0rd" | sudo passwd "ansible_user" --stdin
     ```
 
 #### 2\. Authentication Methods (SSH Keys - Recommended)
