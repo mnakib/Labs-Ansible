@@ -5,7 +5,7 @@ This article explains how to use Ansible to create basic resources on OpenShift.
 
 ## Installing and Configuring Ansible
 
-Use this [link to go through the process of installing and configuring Ansible on RHEL10](https://github.com/mnakib/Labs-Ansible/blob/main/Installing-Ansible-on-RHEL10.md)
+Use this [link] to go through the process of installing and configuring Ansible on RHEL10(https://github.com/mnakib/Labs-Ansible/blob/main/Installing-Ansible-on-RHEL10.md)
 
 
 ## Install a Single Node OpenShift (SNO) Cluster
